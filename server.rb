@@ -27,7 +27,7 @@ require 'sinatra'
       @movies = movies
 
       #binding.pry
-      sorted_movies = @movies.sort_by {|hash, value| hash[:title] }
+      sorted_movies = @movies.sort_by {|key, value| key[:title] }
       @sorted_movies = sorted_movies
       # binding.pry
       # @titles = get_title(movies)
