@@ -14,7 +14,7 @@ require 'sinatra/reloader'
       sorted_movies = @movies.sort_by {|key, value| key[:title] }
       @sorted_movies = sorted_movies
       @page = params[:page]
-        if @page == nil
+        if @page == nil || @page.to_i > (@sorted_movies.length / 20) + 1
          @next_page = 2
          @range_min = 0
          @range_max = 19
