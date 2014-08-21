@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'sinatra/reloader'
     require 'csv'
     require 'pry'
      movies = []
@@ -6,37 +7,26 @@ require 'sinatra'
         movies << row.to_hash
       end
 
-    # def get_title(movies)
-    #   titles = []
-    #   movies.each do |title|
-    #     titles << title[:title]
-    #   end
-    #   titles
-    # end
-
-    # def get_ids(movies)
-    #   ids = []
-    #   movies.each do |id|
-    #     ids << id[:id]
-    #   end
-    #   idsget
-    # end
 
 
     get '/movies' do
       @movies = movies
-
-      #binding.pry
       sorted_movies = @movies.sort_by {|key, value| key[:title] }
       @sorted_movies = sorted_movies
-      # binding.pry
-      # @titles = get_title(movies)
-      # @ids = get_ids(movies)
-      #   @ids.each do |id|
-      #     @idurl = id
-        # end
+      @page = params[:page]
+        if @page == nil
+         @next_page = 2
+         @range_min = 0
+         @range_max = 19
+        else
+         @next_page = @page.to_i + 1
+         @range_min = (@page.to_i - 1)*20
+         @range_max = @range_min + 19
+        end
+      #binding.pry
       erb :index
     end
+
 
     get '/movies/:id' do
       @id = params[:id]

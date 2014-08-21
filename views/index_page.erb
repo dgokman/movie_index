@@ -10,15 +10,15 @@
 
     <ul>
 
-    <% @sorted_movies[@range_min..@range_max].each do |movie| %>
+    <% @sorted_movies.each do |movie| %>
       <li><a href="/movies/<%= movie[:id] %>">
       <%= movie[:title] %></a></li><% end %>
 
 
     </ul>
-
-    <a href="/movies?page=<%= @next_page %>">
-    <%= "Next Page" %></a>
-
+    <% @pages.each do |page| %>
+    <a href="/movies?page=<%= page %>">
+    <%= page %></a>
+    <% end %>
   </body>
 </html>
