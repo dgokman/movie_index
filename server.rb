@@ -23,7 +23,12 @@ require 'sinatra/reloader'
          @range_min = (@page.to_i - 1)*20
          @range_max = @range_min + 19
         end
-      #binding.pry
+      @query = params[:query]
+      @id = params[:id]
+      @id_int = @id.to_i
+      @search_results = @sorted_movies.find_all {|movie| @query == movie[:title] }
+        #binding.pry
+
       erb :index
     end
 

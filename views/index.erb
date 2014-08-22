@@ -20,5 +20,13 @@
     <a href="/movies?page=<%= @next_page %>">
     <%= "Next Page" %></a>
 
+    <form action="/movies" method="get">
+    <label for="query">Search: </label>
+    <input type="text" name="query" id="query" />
+
+    <input type="submit" value="Search" /><br>
+    <a href="/movies/<%= @search_results[0][:id] %>"><%= @search_results[0][:title] %></a>
+    </form>
+
   </body>
 </html>
